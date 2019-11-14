@@ -7,6 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(SurveySource::class, function (Faker $faker) {
     return [
-        'source_token' => $faker->unique()->uuid
+        'source_token' => $faker->unique()->uuid,
+        'client_id' => $faker->numberBetween(1, 286),
+        'is_maintenance' => $faker->boolean(),
     ];
 });
