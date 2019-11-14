@@ -15,7 +15,7 @@ class CreateSurveyAdministrationsTable extends Migration
     {
         Schema::create('survey_administrations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('survey_id');
+            $table->unsignedBigInteger('survey_information_id');
             $table->unsignedTinyInteger('atencion_telefonica');
             $table->unsignedTinyInteger('inconveniente');
             $table->unsignedTinyInteger('solucionado');

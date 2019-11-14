@@ -15,11 +15,11 @@ class CreateSurveyTechnicalServicesTable extends Migration
     {
         Schema::create('survey_technical_services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('survey_id');
+            $table->unsignedBigInteger('survey_information_id');
             $table->unsignedTinyInteger('ingenieria');
             $table->unsignedTinyInteger('puesta_servicio');
-            $table->unsignedTinyInteger('capacitacion');
-            $table->unsignedTinyInteger('montaje');
+            $table->unsignedTinyInteger('capacitacion')->nullable();
+            $table->unsignedTinyInteger('montaje')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

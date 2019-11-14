@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Survey;
 
 use App\Http\Controllers\Controller;
+use App\SurveyInformation;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -14,10 +15,9 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        return response([
-            'route' => 'encuesta/',
-            'method' => 'get'
-        ]);
+        $surveys = SurveyInformation::all();
+
+        return response($surveys);
     }
 
     /**
@@ -28,6 +28,8 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
+         
+
         return response([
             'route' => 'encuesta/',
             'method' => 'post'

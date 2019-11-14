@@ -15,7 +15,7 @@ class CreateSurveyMaintenanceServicesTable extends Migration
     {
         Schema::create('survey_maintenance_services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('survey_id');
+            $table->unsignedBigInteger('survey_information_id');
             $table->unsignedTinyInteger('horarios_fechas');
             $table->unsignedTinyInteger('tecnico_capacidad');
             $table->unsignedTinyInteger('programa_mantenimiento');

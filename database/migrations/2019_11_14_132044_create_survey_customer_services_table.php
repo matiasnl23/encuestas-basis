@@ -15,7 +15,7 @@ class CreateSurveyCustomerServicesTable extends Migration
     {
         Schema::create('survey_customer_services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('survey_id');
+            $table->unsignedBigInteger('survey_information_id');
             $table->unsignedTinyInteger('atencion_preventa');
             $table->unsignedTinyInteger('oferta_calidad');
             $table->unsignedTinyInteger('oferta_plazo');

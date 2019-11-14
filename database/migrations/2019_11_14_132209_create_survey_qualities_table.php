@@ -15,12 +15,12 @@ class CreateSurveyQualitiesTable extends Migration
     {
         Schema::create('survey_qualities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('survey_id');
+            $table->unsignedBigInteger('survey_information_id');
             $table->unsignedTinyInteger('conformidad');
             $table->unsignedTinyInteger('recomendacion');
             $table->unsignedTinyInteger('iso_existencia');
             $table->unsignedTinyInteger('iso_utilidad');
-            $table->unsignedTinyInteger('comentario');
+            $table->text('comentario');
             $table->timestamps();
         });
     }
