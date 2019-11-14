@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SurveySource extends Model
 {
-    protected $fillable = ['source_token', 'client_id', 'is_maintenance'];
+    protected $fillable = ['source_uuid', 'source_hash', 'client_id', 'is_maintenance'];
 
     public function surveys()
     {

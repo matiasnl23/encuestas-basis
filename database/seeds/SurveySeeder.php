@@ -16,7 +16,7 @@ class SurveySeeder extends Seeder
     {
         $faker = Faker::create();
         $surveySourcesLength = SurveySource::count();
-        $surveysToCreate = $faker->numberBetween(100, 1000);
+        $surveysToCreate = $faker->numberBetween(50, 200);
 
         for ($i=0; $i < $surveysToCreate; $i++) { 
             $id = $faker->numberBetween(1, $surveySourcesLength);

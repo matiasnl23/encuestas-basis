@@ -15,7 +15,8 @@ class CreateSurveySourcesTable extends Migration
     {
         Schema::create('survey_sources', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('source_token', 255);
+            $table->string('source_uuid', 255);
+            $table->string('source_hash', 255);
             $table->unsignedBigInteger('client_id');
             $table->boolean('is_maintenance')->default(false);
             $table->timestamps();

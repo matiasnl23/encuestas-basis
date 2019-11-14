@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(SurveyInformation::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'company' => $faker->company,
+        'job_title' => $faker->jobTitle,
         'email' => $faker->companyEmail
     ];
 });

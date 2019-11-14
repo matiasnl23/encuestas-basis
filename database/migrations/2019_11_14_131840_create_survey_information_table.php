@@ -17,7 +17,7 @@ class CreateSurveyInformationTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('survey_source_id')->nullable();
             $table->string('name', 50);
-            $table->string('company', 100);
+            $table->string('job_title', 150);
             $table->string('email', 100);
             $table->timestamps();
             $table->softDeletes();
