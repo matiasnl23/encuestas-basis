@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\surveyInformation;
+use App\SurveyInformation;
 use Faker\Generator as Faker;
 
-$factory->define(surveyInformation::class, function (Faker $faker) {
+$factory->define(SurveyInformation::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'company' => $faker->company,

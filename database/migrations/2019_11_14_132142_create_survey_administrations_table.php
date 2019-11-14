@@ -18,7 +18,7 @@ class CreateSurveyAdministrationsTable extends Migration
             $table->unsignedBigInteger('survey_information_id');
             $table->unsignedTinyInteger('atencion_telefonica');
             $table->unsignedTinyInteger('inconveniente');
-            $table->unsignedTinyInteger('solucionado');
+            $table->unsignedTinyInteger('solucionado')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
