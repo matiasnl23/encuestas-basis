@@ -3,21 +3,35 @@
 namespace App\Http\Controllers\Survey;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Survey\SurveyRepository as Repo;
 use App\SurveyInformation;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
+    private $repo;
+
+    public function __construct() {
+        $this->repo = new Repo();
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $surveys = SurveyInformation::all();
+        $uuid = $request->query('i') ?? '';
+        $hash = $request->query('h') ?? '';
 
-        return response($surveys);
+        $surveyForm = $this->repo->getSurveyForm($uuid, $hash);
+
+        if(!$surveyForm) {
+            return response(null, 404);
+        }
+
+        return $surveyForm;
     }
 
     /**
@@ -33,34 +47,6 @@ class SurveyController extends Controller
         return response([
             'route' => 'encuesta/',
             'method' => 'post'
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\SurveyAdministration  $surveyAdministration
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return response([
-            'route' => 'encuesta/{$id}',
-            'method' => 'get'
-        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\SurveyAdministration  $surveyAdministration
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return response([
-            'route' => 'encuesta/{$id}',
-            'method' => 'delete'
         ]);
     }
 }

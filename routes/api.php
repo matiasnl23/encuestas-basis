@@ -19,5 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('Survey')->group(function() {
-    Route::apiResource('encuesta', 'SurveyController')->except(['update']);
+    Route::apiResource('encuesta', 'SurveyController')->only(['index', 'store']);
+
+    Route::prefix('analytics')->group(function() {
+        Route::get('', 'SurveyAnalyticsController@index');
+        Route::get('counter', 'SurveyAnalyticsController@counter');
+    });
 });
