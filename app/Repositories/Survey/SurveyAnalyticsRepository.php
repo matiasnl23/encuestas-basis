@@ -20,13 +20,25 @@ class SurveyAnalyticsRepository
 
     public function countersOfSurveys()
     {
-        $unresponsed = SurveySource::doesntHave('surveys')->count();
-        $responsed = SurveySource::has('surveys')->count();
+        $unresponsed_maintenance = SurveySource::doesntHave('surveys')
+            ->where('is_maintenance', true)->count();
+        $unresponsed_ts = SurveySource::doesntHave('surveys')
+            ->where('is_maintenance', false)->count();
+        $responsed_maintenance = SurveySource::has('surveys')
+            ->where('is_maintenance', true)->count();
+        $responsed_ts = SurveySource::has('surveys')
+            ->where('is_maintenance', false)->count();
 
         return [
-            'unresponsed' => $unresponsed,
+            'unresponsed' => [
+                'total' => $unresponsed_maintenance + $unresponsed_ts,
+                'maintenance' => $unresponsed_maintenance,
+                'technical_service' => $unresponsed_ts,
+            ],
             'responsed' => [
-                'count' => $responsed
+                'total' => $responsed_maintenance + $responsed_ts,
+                'maintenance' => $responsed_maintenance,
+                'technical_service' => $responsed_ts,
             ]
         ];
     }

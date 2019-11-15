@@ -24,11 +24,6 @@ class SurveyAnalyticsController extends Controller
     }
 
     public function counter() {
-        
-
-        return [
-            'route' => 'analytics/counter',
-            'method' => 'get'
-        ];
+        return $this->repo->countersOfSurveys();
     }
 }
