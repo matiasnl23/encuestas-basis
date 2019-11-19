@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Survey;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\StoreSurvey;
 use App\Http\Controllers\Controller;
 use App\Repositories\Survey\SurveyRepository as Repo;
-use App\SurveyInformation;
-use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
@@ -40,13 +40,17 @@ class SurveyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSurvey $request)
     {
-         
+        $source = $this->repo->getSurveySource($request->uuid, $request->hash);
+        $payload = $request->except('uuid', 'hash');
 
-        return response([
-            'route' => 'encuesta/',
-            'method' => 'post'
-        ]);
+        // Return an error if maintenance or technical params are invalid
+        $checkBody = $this->repo->checkBodyParams($source, $payload);
+        if($checkBody) {
+            return response($checkBody)->setStatusCode(422);
+        }
+
+        return $this->repo->storeSurvey($source, $payload);
     }
 }
