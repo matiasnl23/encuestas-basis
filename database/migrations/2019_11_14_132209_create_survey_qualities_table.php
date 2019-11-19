@@ -22,6 +22,7 @@ class CreateSurveyQualitiesTable extends Migration
             $table->unsignedTinyInteger('iso_utilidad');
             $table->text('comentario');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
