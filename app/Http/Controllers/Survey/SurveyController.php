@@ -27,10 +27,6 @@ class SurveyController extends Controller
 
         $surveyForm = $this->repo->getSurveyForm($uuid, $hash);
 
-        if(!$surveyForm) {
-            return response(null, 404);
-        }
-
         return $surveyForm;
     }
 
@@ -44,11 +40,16 @@ class SurveyController extends Controller
     {
         $source = $this->repo->getSurveySource($request->uuid, $request->hash);
         $payload = $request->except('uuid', 'hash');
+        
+        // Return an error if the survey has been completed for this email
+        if($error = $this->repo->verifyIfSurveyHasBeenDone($source->id, $payload['email'])) {
+            return response($error, 409);
+        }
 
         // Return an error if maintenance or technical params are invalid
         $checkBody = $this->repo->checkBodyParams($source, $payload);
         if($checkBody) {
-            return response($checkBody)->setStatusCode(422);
+            return response($checkBody, 422);
         }
 
         return $this->repo->storeSurvey($source, $payload);

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Survey;
 
+use App\SurveyInformation;
 use App\SurveySource;
 
 class SurveyRepository
@@ -14,7 +15,7 @@ class SurveyRepository
 
     public function getSurveyForm(string $uuid, string $hash): ?array
     {
-        if($exists = $this->checkIfSurveyExists($uuid, $hash)) {
+        if($exists = $this->getSurveySource($uuid, $hash)) {
             return ['is_maintenance' => $exists->is_maintenance];
         }
 
@@ -89,10 +90,19 @@ class SurveyRepository
         }
     }
 
-    private function checkIfSurveyExists(string $uuid, string $hash): ?SurveySource
+    public function verifyIfSurveyHasBeenDone(int $id, string $email)
     {
-        $source = SurveySource::where([ 'source_uuid' => $uuid, 'source_hash' => $hash])->first();
+        $survey = SurveyInformation::where([
+            'survey_source_id' => $id,
+            'email' => $email
+        ])->first();
 
-        return $source;
+        if($survey) {
+            return [
+                'message' => 'The survey is already completed',
+            ];
+        }
+
+        return;
     }
 }
