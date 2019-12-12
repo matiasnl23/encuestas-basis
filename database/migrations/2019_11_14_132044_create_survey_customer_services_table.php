@@ -19,7 +19,7 @@ class CreateSurveyCustomerServicesTable extends Migration
             $table->unsignedTinyInteger('atencion_preventa');
             $table->unsignedTinyInteger('oferta_calidad');
             $table->unsignedTinyInteger('oferta_plazo');
-            $table->unsignedTinyInteger('entrega_plazo');
+            $table->unsignedTinyInteger('entrega_plazo')->nullable();
             $table->unsignedTinyInteger('precios');
             $table->timestamps();
             $table->softDeletes();

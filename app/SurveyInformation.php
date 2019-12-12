@@ -9,7 +9,7 @@ class SurveyInformation extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ["name", "job_title", "email"];
+    protected $fillable = ["name", "job_title", "email", "company"];
 
     public function customerService()
     {

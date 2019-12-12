@@ -38,8 +38,16 @@ class SurveyController extends Controller
      */
     public function store(StoreSurvey $request)
     {
-        $source = $this->repo->getSurveySource($request->uuid, $request->hash);
+        // If uuid and hash is present
+        $source = $request->filled(['uuid', 'hash']) ?
+            $this->repo->getSurveySource($request->uuid, $request->hash) : null;
+
         $payload = $request->except('uuid', 'hash');
+
+        // Create a survey without source (unsolicited)
+        if(is_null($source)) {
+            return $this->repo->storeSurveyWithoutSource($payload);
+        }
         
         // Return an error if the survey has been completed for this email
         if($error = $this->repo->verifyIfSurveyHasBeenDone($source->id, $payload['email'])) {

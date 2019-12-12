@@ -16,9 +16,10 @@ class CreateSurveyInformationTable extends Migration
         Schema::create('survey_information', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('survey_source_id')->nullable();
-            $table->string('name', 50);
+            $table->string('name', 100);
             $table->string('job_title', 150);
             $table->string('email', 100);
+            $table->string('company', 250);
             $table->timestamps();
             $table->softDeletes();
         });

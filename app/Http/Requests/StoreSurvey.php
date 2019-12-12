@@ -40,19 +40,20 @@ class StoreSurvey extends FormRequest
 
         return [
             // Origin
-            'uuid' => 'required|uuid',
-            'hash' => 'required|string',
+            'uuid' => 'required_without:company|uuid',
+            'hash' => 'required_without:company|string',
 
             // Information
             'name' => 'required|string|max:100',
-            'job_title' => 'required|string|max:100',
+            'job_title' => 'required|string|max:150',
             'email' => 'required|email|max:100',
+            'company' => 'required_without:uuid,hash|string|max:250',
 
             // Customer Service
             'atencion_preventa' => 'required|integer|between:1,5',
             'oferta_calidad' => 'required|integer|between:1,5',
             'oferta_plazo' => 'required|integer|between:1,5',
-            'entrega_plazo' => 'required|integer|between:1,5',
+            'entrega_plazo' => 'integer|between:1,5',
             'precios' => 'required|integer|between:1,5',
 
             // Maintenance

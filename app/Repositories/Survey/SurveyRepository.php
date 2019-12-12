@@ -43,6 +43,29 @@ class SurveyRepository
         ]);
     }
 
+    public function storeSurveyWithoutSource(array $payload) {
+        $survey_information = SurveyInformation::create($payload);
+        $survey_information->customerService()->create($payload);
+        $survey_information->administration()->create($payload);
+        $survey_information->quality()->create($payload);
+
+        if(in_array("horarios_fechas", $payload)) {
+            $survey_information->maintenanceService()->create($payload);
+        }
+
+        if(in_array("ingenieria", $payload)) {
+            $survey_information->technicalService()->create($payload);
+        }
+
+        return $survey_information->load([
+            'customerService',
+            'maintenanceService',
+            'technicalService',
+            'administration',
+            'quality'
+        ]);
+    }
+
     public function checkBodyParams(SurveySource $source, $payload)
     {
         // Params in each service
