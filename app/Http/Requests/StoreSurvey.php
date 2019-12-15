@@ -72,7 +72,7 @@ class StoreSurvey extends FormRequest
             // Administration
             'atencion_telefonica' => 'required|integer|between:1,5',
             'inconveniente' => 'required|integer|between:1,3',
-            'solucionado' => 'required_whit:inconveniente|integer|between:1,3',
+            'solucionado' => 'required_with:inconveniente|integer|between:1,3',
 
             // Quality
             'conformidad' => 'required|integer|between:1,5',
