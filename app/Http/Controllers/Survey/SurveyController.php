@@ -15,6 +15,11 @@ class SurveyController extends Controller
         $this->repo = new Repo();
     }
 
+    public function all(Request $request)
+    {
+        return $this->repo->getSurveyResults(true);
+    }
+
     /**
      * Display a listing of the resource.
      *

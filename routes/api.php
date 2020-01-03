@@ -20,6 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Survey')->group(function() {
     Route::apiResource('encuesta', 'SurveyController')->only(['index', 'store']);
+    Route::prefix('encuesta')->group(function() {
+        Route::get('resultados', 'SurveyController@all');
+    });
 
     Route::prefix('analytics')->group(function() {
         Route::get('', 'SurveyAnalyticsController@index');

@@ -7,6 +7,22 @@ use App\SurveySource;
 
 class SurveyRepository
 {
+    public function getSurveyResults(bool $withData = false) {
+        $surveyResults = new SurveyInformation();
+
+        if($withData) {
+            $surveyResults = $surveyResults->with([
+                'customerService',
+                'technicalService',
+                'maintenanceService',
+                'administration',
+                'quality'
+            ]);
+        }
+
+        return $surveyResults->get();
+    }
+
     public function getSurveySource(string $uuid, string $hash)
     {
         return SurveySource::where(['source_uuid' => $uuid, 'source_hash' => $hash])
