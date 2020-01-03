@@ -20,7 +20,7 @@ class SurveyRepository
             ]);
         }
 
-        return $surveyResults->get();
+        return $surveyResults->latest()->get();
     }
 
     public function getSurveySource(string $uuid, string $hash)
