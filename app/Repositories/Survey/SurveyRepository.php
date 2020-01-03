@@ -65,11 +65,11 @@ class SurveyRepository
         $survey_information->administration()->create($payload);
         $survey_information->quality()->create($payload);
 
-        if(in_array("horarios_fechas", $payload)) {
+        if(array_key_exists('horarios_fechas', $payload)) {
             $survey_information->maintenanceService()->create($payload);
         }
 
-        if(in_array("ingenieria", $payload)) {
+        if(array_key_exists('ingenieria', $payload)) {
             $survey_information->technicalService()->create($payload);
         }
 
